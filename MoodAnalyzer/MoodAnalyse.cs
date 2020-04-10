@@ -11,7 +11,7 @@ public class MoodAnalyse
     /// <summary>
     /// Default Constructor
     /// </summary>
-    public MoodAnalyse(){ }
+    public MoodAnalyse() { }
 
     /// <summary>
     /// Parameterised Constructor.
@@ -21,6 +21,8 @@ public class MoodAnalyse
     {
         this.message = message;
     }
+  
+    
     /// <summary>
     /// AnalyseMood Function To Check The Mood And Respond HAPPY or SAD.
     /// </summary>
@@ -28,13 +30,21 @@ public class MoodAnalyse
     /// <returns></returns>
     public string AnalyseMood()
     {
-        if (this.message.Contains("Sad"))
+        try
         {
-            return "SAD";
+            if (this.message.Contains("Sad"))
+            {
+                return "SAD";
+            }
+            else
+            {
+                return "HAPPY";
+            }
         }
-        else
+        catch 
         {
             return "HAPPY";
         }
     }
+    
 }
