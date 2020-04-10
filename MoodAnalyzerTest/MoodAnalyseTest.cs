@@ -1,3 +1,4 @@
+using MoodAnalyzer;
 using NUnit.Framework;
 
 namespace MoodAnalyzerTest
@@ -37,13 +38,20 @@ namespace MoodAnalyzerTest
         /// Test Case 2.1 If Given Null should return HAPPY.
         /// </summary>
         [Test]
-        public void GivenNullMoodShouldReturnHAPPY()
+        public void GivenNullMoodShouldThrowMoodAnaylsisException()
         {
-            string expected = "HAPPY";
+            string expected = "Please Enter Proper Mood";
             string message=null;
             MoodAnalyse moodAnalyse = new MoodAnalyse(message);
-            string mood = moodAnalyse.AnalyseMood();
-            Assert.AreEqual(expected, mood);
+            try
+            {
+                string mood = moodAnalyse.AnalyseMood();
+            }
+            catch (MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
         }
+
     }
 }
