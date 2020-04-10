@@ -19,5 +19,18 @@ namespace MoodAnalyzerTest
             string mood = moodAnalyse.AnalyseMood(message);
             Assert.AreEqual(expected,mood);
         }
+
+        /// <summary>
+        /// Test Case 1.2 given Any Mood Should Return HAPPY.
+        /// </summary>
+        [Test]
+        public void GivenAnyMoodShouldReturnHAPPY()
+        {
+            string expected = "HAPPY";
+            string message = "I am in Any Mood";
+            MoodAnalyse moodAnalyse = new MoodAnalyse();
+            string mood = moodAnalyse.AnalyseMood(message);
+            Assert.AreEqual(expected, mood);
+        }
     }
 }
