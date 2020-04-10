@@ -8,8 +8,8 @@ namespace MoodAnalyzer
         {
             Console.WriteLine("Enter the Message");
             string message = Console.ReadLine();
-            MoodAnalyse moodAnalyse = new MoodAnalyse();
-            string mood = moodAnalyse.AnalyseMood(message);
+            MoodAnalyse moodAnalyse = new MoodAnalyse(message);
+            string mood = moodAnalyse.AnalyseMood();
             Console.WriteLine(mood);
         }
     }

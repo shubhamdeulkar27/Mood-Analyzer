@@ -5,14 +5,30 @@
 /// </summary>
 public class MoodAnalyse
 {
+    //Variable
+    private string message;
+
+    /// <summary>
+    /// Default Constructor
+    /// </summary>
+    public MoodAnalyse(){ }
+
+    /// <summary>
+    /// Parameterised Constructor.
+    /// </summary>
+    /// <param name="message"></param>
+    public MoodAnalyse(string message)
+    {
+        this.message = message;
+    }
     /// <summary>
     /// AnalyseMood Function To Check The Mood And Respond HAPPY or SAD.
     /// </summary>
     /// <param name="message"></param>
     /// <returns></returns>
-    public string AnalyseMood(string message)
+    public string AnalyseMood()
     {
-        if (message.Contains("Sad"))
+        if (this.message.Contains("Sad"))
         {
             return "SAD";
         }
