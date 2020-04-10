@@ -33,6 +33,9 @@ namespace MoodAnalyzerTest
             Assert.AreEqual(expected, mood);
         }
 
+        /// <summary>
+        /// Test Case 2.1 If Given Null should return HAPPY.
+        /// </summary>
         [Test]
         public void GivenNullMoodShouldReturnHAPPY()
         {
