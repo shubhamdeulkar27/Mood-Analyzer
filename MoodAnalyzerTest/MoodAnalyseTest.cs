@@ -35,7 +35,7 @@ namespace MoodAnalyzerTest
         }
 
         /// <summary>
-        /// Test Case 2.1 If Given Null should return HAPPY.
+        /// Test Case 3.1 If Given Null Throw Excption.
         /// </summary>
         [Test]
         public void GivenNullMoodShouldThrowMoodAnaylsisException()
@@ -53,5 +53,23 @@ namespace MoodAnalyzerTest
             }
         }
 
+        /// <summary>
+        /// Test Case 3.2 If Given Empty mood should throw MoodAnalysisException.
+        /// </summary>
+        [Test]
+        public void GivenEmptyMoodShouldThrowMoodAnalysisException()
+        {
+            string expected = "Please Enter Proper Mood";
+            string message = "";
+            MoodAnalyse moodAnalyse = new MoodAnalyse(message);
+            try
+            {
+                string mood = moodAnalyse.AnalyseMood();
+            }
+            catch (MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected,exception.Message);
+            }
+        }
     }
 }
