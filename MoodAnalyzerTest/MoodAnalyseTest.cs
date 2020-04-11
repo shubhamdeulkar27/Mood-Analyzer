@@ -1,5 +1,6 @@
 using MoodAnalyzer;
 using NUnit.Framework;
+using System.Reflection.Emit;
 
 namespace MoodAnalyzerTest
 {
@@ -71,5 +72,17 @@ namespace MoodAnalyzerTest
                 Assert.AreEqual(expected,exception.Message);
             }
         }
+
+        /// <summary>
+        /// Test Case 4.1 Given MoodAnalyse Class Name Should Return MoodAnalyser Object.
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject()
+        {
+            object expected = new MoodAnalyse();
+            object obj = MoodAnalyseFactory.CreateMoodAnalyse();
+            expected.Equals(obj);
+        }
+
     }
 }
