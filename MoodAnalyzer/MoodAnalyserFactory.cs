@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Reflection;
+using System.Reflection.Emit;
+using System.Reflection.Metadata;
 
 namespace MoodAnalyzer
 {
     public class MoodAnalyseFactory
     {
         /// <summary>
-        /// CreateMoodAnalyse method to create object of MoodAnalyse class.
+        /// Function to Create Instance and Return of MoodAnalyse Class.
         /// </summary>
-        public static object CreateMoodAnalyse()
+        /// <returns></returns>
+        public static object CreateMoodAnalyse(string className)
         {
             Assembly executing = Assembly.GetExecutingAssembly();
-            Type moodAnaylseType = executing.GetType("MoodAnalyse");
+            Type moodAnaylseType = executing.GetType(className);
             return Activator.CreateInstance(moodAnaylseType);
         }
     }

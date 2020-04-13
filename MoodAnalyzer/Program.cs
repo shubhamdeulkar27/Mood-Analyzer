@@ -18,17 +18,6 @@ namespace MoodAnalyzer
             {
                 Console.WriteLine(exception.Message);
             }
-
-            object m1 = new MoodAnalyse();
-            object m2 = MoodAnalyseFactory.CreateMoodAnalyse();
-            if (m1.Equals(m2))
-            {
-                Console.WriteLine("Eql");
-            }
-            else
-            {
-                Console.WriteLine("Not eql");
-            }
         }
     }
 }

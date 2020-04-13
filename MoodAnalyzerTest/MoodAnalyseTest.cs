@@ -1,5 +1,6 @@
 using MoodAnalyzer;
 using NUnit.Framework;
+using System.Reflection;
 using System.Reflection.Emit;
 
 namespace MoodAnalyzerTest
@@ -79,9 +80,9 @@ namespace MoodAnalyzerTest
         [Test]
         public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject()
         {
+            object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyse");
             object expected = new MoodAnalyse();
-            object obj = MoodAnalyseFactory.CreateMoodAnalyse();
-            expected.Equals(obj);
+            expected.Equals(moodAnalyseObject);
         }
 
     }
