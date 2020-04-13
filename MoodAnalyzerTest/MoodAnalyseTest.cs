@@ -80,7 +80,7 @@ namespace MoodAnalyzerTest
         [Test]
         public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject()
         {
-            object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyse");
+            object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyse","MoodAnalyse");
             object expected = new MoodAnalyse();
             expected.Equals(moodAnalyseObject);
         }
@@ -94,8 +94,25 @@ namespace MoodAnalyzerTest
             string expected = "Class Not Found";
             try
             {
-                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("DemoClass");
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("DemoClass","MoodAnalyse");
+            }
+            catch (MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
 
+        /// <summary>
+        /// Test Case 4.3 Given Improper Constructor should throw MoodAnalysisException.
+        /// </summary>
+        [Test]
+        public void GivenImproperConstructorShouldThrowMoodAnalysisException()
+        {
+
+            string expected = "No Such Method Found";
+            try
+            {
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyse", "DemoConstructor");
             }
             catch (MoodAnalysisException exception)
             {
