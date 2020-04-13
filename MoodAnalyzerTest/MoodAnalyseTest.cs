@@ -85,5 +85,22 @@ namespace MoodAnalyzerTest
             expected.Equals(moodAnalyseObject);
         }
 
+        /// <summary>
+        /// Test Case 4.2 Given Improper Class NAme Should throw MoodAnalyssiException.
+        /// </summary>
+        [Test]
+        public void GivenImproperClassNameShouldThrowMoodAnalysisException()
+        {
+            string expected = "Class Not Found";
+            try
+            {
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("DemoClass");
+
+            }
+            catch (MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
     }
 }
