@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 
 namespace MoodAnalyzer
 {
@@ -45,6 +46,17 @@ namespace MoodAnalyzer
             {
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,"No Such Method Found");
             }
+        }
+
+        public static string InvokeAnalyseMood(string message)
+        {
+            string[] messageAr = { message };
+            Type type = Type.GetType("MoodAnalyse");
+            ConstructorInfo constructorInfo = MoodAnalyseFactory.GetConstructor("MoodAnalysis");
+            object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse(constructorInfo,messageAr);
+            MethodInfo analyseMoodInfo = type.GetMethod("AnalyseMood");
+            object mood = analyseMoodInfo.Invoke(moodAnalyseObject,null);
+            return mood.ToString();
         }
     }
 }

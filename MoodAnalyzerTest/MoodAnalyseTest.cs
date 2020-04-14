@@ -107,6 +107,9 @@ namespace MoodAnalyzerTest
             }
         }
 
+        /// <summary>
+        /// Test Case 5.3 Given Improper Constructor Should Throw MoodAnalysisException.
+        /// </summary>
         [Test]
         public void GivenImproperConstructorShouldThrowMoodAnalysisException()
         {
@@ -123,6 +126,17 @@ namespace MoodAnalyzerTest
             {
                 Assert.AreEqual(expected,exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Test Case 6.1 Given Happy Should Return Happy.
+        /// </summary>
+        [Test]
+        public void GivenHappyMoodShouldReturnHappy()
+        {
+            string expected = "HAPPY";
+            string mood = MoodAnalyseFactory.InvokeAnalyseMood("Happy");
+            Assert.AreEqual(expected,mood);
         }
     }
 }
