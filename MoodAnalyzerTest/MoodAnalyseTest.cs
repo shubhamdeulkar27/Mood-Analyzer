@@ -81,10 +81,29 @@ namespace MoodAnalyzerTest
         public void GivenMoodAnalyseShouldReturnMoodAnalyse()
         {
             object expected = new MoodAnalyse();
-            ConstructorInfo constructor = MoodAnalyseFactory.GetConstructor();
+            ConstructorInfo constructor = MoodAnalyseFactory.GetConstructor("MoodAnalyse");
             string[] message= {"I am in Sad Mood"};
             object newObject = MoodAnalyseFactory.CreateMoodAnalyse(constructor, message);
             expected.Equals(newObject);
+        }
+
+        /// <summary>
+        /// Test Case 5.2 Given Improper Class Name Should Throw Exception.
+        /// </summary>
+        [Test]
+        public void GivenImproperClassNameShouldThrowMoodAnalysisException()
+        {
+            string expected = "No Such Class Found";
+            try 
+            {
+                ConstructorInfo constructor = MoodAnalyseFactory.GetConstructor("AnyClass");
+                string[] message = { "I am in Sad Mood" };
+                object newObject = MoodAnalyseFactory.CreateMoodAnalyse(constructor, message);
+            }
+            catch(MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected,exception.Message);
+            }
         }
     }
 }

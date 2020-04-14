@@ -12,13 +12,20 @@ namespace MoodAnalyzer
         /// Function to get Parameteres Constructor.
         /// </summary>
         /// <returns></returns>
-        public static ConstructorInfo GetConstructor()
+        public static ConstructorInfo GetConstructor(string className)
         {
-            Type type = typeof(MoodAnalyse);
-            Type[] types = new Type[1];
-            types[0] = typeof(string);
-            ConstructorInfo constructorInfo = type.GetConstructor(types);
-            return constructorInfo;
+            if (className.Equals("MoodAnalyse"))
+            {
+                Type type = typeof(MoodAnalyse);
+                Type[] types = new Type[1];
+                types[0] = typeof(string);
+                ConstructorInfo constructorInfo = type.GetConstructor(types);
+                return constructorInfo;
+            }
+            else
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "No Such Class Found");
+            }
         }
 
         /// <summary>
