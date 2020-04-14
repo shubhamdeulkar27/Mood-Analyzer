@@ -135,8 +135,25 @@ namespace MoodAnalyzerTest
         public void GivenHappyMoodShouldReturnHappy()
         {
             string expected = "HAPPY";
-            string mood = MoodAnalyseFactory.InvokeAnalyseMood("Happy");
+            string mood = MoodAnalyseFactory.InvokeAnalyseMood("AnalyseMood","Happy");
             Assert.AreEqual(expected,mood);
+        }
+
+        /// <summary>
+        /// Test Case 6.2 Given Improper Method Name Should Throw MoodAnalysisException.
+        /// </summary>
+        [Test]
+        public void GivenImproperMethodNameShouldThrowMoodAnalysisException()
+        {
+            string expected = "No Such Method Found";
+            try
+            {
+                string mood = MoodAnalyseFactory.InvokeAnalyseMood("AnyMethod", "Happy");
+            }
+            catch (MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected,exception.Message);
+            }
         }
     }
 }

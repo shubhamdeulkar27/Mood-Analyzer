@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Reflection.Emit;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
 
 namespace MoodAnalyzer
 {
@@ -48,15 +44,28 @@ namespace MoodAnalyzer
             }
         }
 
-        public static string InvokeAnalyseMood(string message)
+        /// <summary>
+        /// Function to Invoke AnlyseMood Function Using Reflection.
+        /// </summary>
+        /// <param name="methodName"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static string InvokeAnalyseMood(string methodName,string message)
         {
-            string[] messageAr = { message };
-            Type type = Type.GetType("MoodAnalyse");
-            ConstructorInfo constructorInfo = MoodAnalyseFactory.GetConstructor("MoodAnalysis");
-            object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse(constructorInfo,messageAr);
-            MethodInfo analyseMoodInfo = type.GetMethod("AnalyseMood");
-            object mood = analyseMoodInfo.Invoke(moodAnalyseObject,null);
-            return mood.ToString();
+            try
+            {
+                string[] messageAr = { message };
+                Type type = Type.GetType("MoodAnalyse");
+                ConstructorInfo constructorInfo = MoodAnalyseFactory.GetConstructor("MoodAnalyse");
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse(constructorInfo, messageAr);
+                MethodInfo analyseMoodInfo = type.GetMethod(methodName);
+                object mood = analyseMoodInfo.Invoke(moodAnalyseObject, null);
+                return mood.ToString();
+            }
+            catch (System.NullReferenceException exception)
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "No Such Method Found");
+            }
         }
     }
 }
