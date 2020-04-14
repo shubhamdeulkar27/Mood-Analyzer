@@ -9,26 +9,28 @@ namespace MoodAnalyzer
     public class MoodAnalyseFactory
     {
         /// <summary>
-        /// Function to Create Instance and Return of MoodAnalyse Class.
+        /// Function to get Parameteres Constructor.
         /// </summary>
         /// <returns></returns>
-        public static object CreateMoodAnalyse(string className, string constructor)
+        public static ConstructorInfo GetConstructor()
         {
-            try 
-            { 
-                Assembly executing = Assembly.GetExecutingAssembly();
-                Type moodAnaylseType = executing.GetType(className);
-                return Activator.CreateInstance(moodAnaylseType);
-            }
-            catch(MoodAnalysisException exception)
-            {
-                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "No Such Method Found");
-            }
-            catch(Exception exception)
-            {
-                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "Class Not Found");
-            }
+            Type type = typeof(MoodAnalyse);
+            Type[] types = new Type[1];
+            types[0] = typeof(string);
+            ConstructorInfo constructorInfo = type.GetConstructor(types);
+            return constructorInfo;
+        }
 
+        /// <summary>
+        /// Function to Create Instance From Parameteries Constructor.
+        /// </summary>
+        /// <param name="constructorInfo"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static object CreateMoodAnalyse(ConstructorInfo constructorInfo, string[] message)
+        {
+            object newObject = constructorInfo.Invoke(message);
+            return newObject;
         }
     }
 }

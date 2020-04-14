@@ -75,49 +75,16 @@ namespace MoodAnalyzerTest
         }
 
         /// <summary>
-        /// Test Case 4.1 Given MoodAnalyse Class Name Should Return MoodAnalyser Object.
+        /// Test Case 5.1 Given MoodAnalyse Should Return MoodAanalyse Object.
         /// </summary>
         [Test]
-        public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject()
+        public void GivenMoodAnalyseShouldReturnMoodAnalyse()
         {
-            object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyse","MoodAnalyse");
             object expected = new MoodAnalyse();
-            expected.Equals(moodAnalyseObject);
-        }
-
-        /// <summary>
-        /// Test Case 4.2 Given Improper Class NAme Should throw MoodAnalyssiException.
-        /// </summary>
-        [Test]
-        public void GivenImproperClassNameShouldThrowMoodAnalysisException()
-        {
-            string expected = "Class Not Found";
-            try
-            {
-                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("DemoClass","MoodAnalyse");
-            }
-            catch (MoodAnalysisException exception)
-            {
-                Assert.AreEqual(expected, exception.Message);
-            }
-        }
-
-        /// <summary>
-        /// Test Case 4.3 Given Improper Constructor should throw MoodAnalysisException.
-        /// </summary>
-        [Test]
-        public void GivenImproperConstructorShouldThrowMoodAnalysisException()
-        {
-
-            string expected = "No Such Method Found";
-            try
-            {
-                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyse", "DemoConstructor");
-            }
-            catch (MoodAnalysisException exception)
-            {
-                Assert.AreEqual(expected, exception.Message);
-            }
+            ConstructorInfo constructor = MoodAnalyseFactory.GetConstructor();
+            string[] message= {"I am in Sad Mood"};
+            object newObject = MoodAnalyseFactory.CreateMoodAnalyse(constructor, message);
+            expected.Equals(newObject);
         }
     }
 }
