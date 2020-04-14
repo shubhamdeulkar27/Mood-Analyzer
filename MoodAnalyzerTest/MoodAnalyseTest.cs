@@ -1,5 +1,6 @@
 using MoodAnalyzer;
 using NUnit.Framework;
+using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -99,6 +100,24 @@ namespace MoodAnalyzerTest
                 ConstructorInfo constructor = MoodAnalyseFactory.GetConstructor("AnyClass");
                 string[] message = { "I am in Sad Mood" };
                 object newObject = MoodAnalyseFactory.CreateMoodAnalyse(constructor, message);
+            }
+            catch(MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected,exception.Message);
+            }
+        }
+
+        [Test]
+        public void GivenImproperConstructorShouldThrowMoodAnalysisException()
+        {
+            string expected = "No Such Method Found";
+            try
+            {
+                object testObject = new object();
+                Type type = testObject.GetType();
+                ConstructorInfo[] constructor = type.GetConstructors();
+                string[] message = { "I am in Sad Mood" };
+                object newObject = MoodAnalyseFactory.CreateMoodAnalyse(constructor[0], message);
             }
             catch(MoodAnalysisException exception)
             {

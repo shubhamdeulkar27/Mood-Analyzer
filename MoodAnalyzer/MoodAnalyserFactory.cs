@@ -14,7 +14,7 @@ namespace MoodAnalyzer
         /// <returns></returns>
         public static ConstructorInfo GetConstructor(string className)
         {
-            if (className.Equals("MoodAnalyse"))
+            try
             {
                 Type type = typeof(MoodAnalyse);
                 Type[] types = new Type[1];
@@ -22,7 +22,7 @@ namespace MoodAnalyzer
                 ConstructorInfo constructorInfo = type.GetConstructor(types);
                 return constructorInfo;
             }
-            else
+            catch(MoodAnalysisException exception)
             {
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "No Such Class Found");
             }
@@ -36,8 +36,15 @@ namespace MoodAnalyzer
         /// <returns></returns>
         public static object CreateMoodAnalyse(ConstructorInfo constructorInfo, string[] message)
         {
-            object newObject = constructorInfo.Invoke(message);
-            return newObject;
+            if(constructorInfo.Equals(MoodAnalyseFactory.GetConstructor("MoodAnalyse")))
+            {
+                object newObject = constructorInfo.Invoke(message);
+                return newObject;
+            }
+            else
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,"No Such Method Found");
+            }
         }
     }
 }
