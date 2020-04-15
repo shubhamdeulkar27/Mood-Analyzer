@@ -62,10 +62,22 @@ namespace MoodAnalyzer
                 object mood = analyseMoodInfo.Invoke(moodAnalyseObject, null);
                 return mood.ToString();
             }
-            catch (System.NullReferenceException exception)
+            catch (Exception exception)
             {
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "No Such Method Found");
             }
+        }
+
+        /// <summary>
+        /// Function to Set The Field Dynamically using Reflection.
+        /// </summary>
+        /// <param name="moodAnalyseobject"></param>
+        /// <param name="message"></param>
+        public static void SetField(MoodAnalyse moodAnalyseobject, string message)
+        {
+            Type type = Type.GetType("MoodAnalyse");
+            FieldInfo field = type.GetField("message", BindingFlags.NonPublic | BindingFlags.Instance);
+            field.SetValue(moodAnalyseobject,message);
         }
     }
 }
