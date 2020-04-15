@@ -73,11 +73,18 @@ namespace MoodAnalyzer
         /// </summary>
         /// <param name="moodAnalyseobject"></param>
         /// <param name="message"></param>
-        public static void SetField(MoodAnalyse moodAnalyseobject, string message)
+        public static void SetField(MoodAnalyse moodAnalyseobject, string message, string fieldName)
         {
-            Type type = Type.GetType("MoodAnalyse");
-            FieldInfo field = type.GetField("message", BindingFlags.NonPublic | BindingFlags.Instance);
-            field.SetValue(moodAnalyseobject,message);
+            try
+            {
+                Type type = Type.GetType("MoodAnalyse");
+                FieldInfo field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
+                field.SetValue(moodAnalyseobject, message);
+            }
+            catch (Exception exception)
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, "No Such Field Found");
+            }
         }
     }
 }

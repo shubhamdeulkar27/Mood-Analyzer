@@ -21,7 +21,7 @@ namespace MoodAnalyzerTest
             string message = "I am in Sad Mood";
             MoodAnalyse moodAnalyse = new MoodAnalyse(message);
             string mood = moodAnalyse.AnalyseMood();
-            Assert.AreEqual(expected,mood);
+            Assert.AreEqual(expected, mood);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace MoodAnalyzerTest
         public void GivenNullMoodShouldThrowMoodAnaylsisException()
         {
             string expected = "Please Enter Proper Mood";
-            string message=null;
+            string message = null;
             MoodAnalyse moodAnalyse = new MoodAnalyse(message);
             try
             {
@@ -71,7 +71,7 @@ namespace MoodAnalyzerTest
             }
             catch (MoodAnalysisException exception)
             {
-                Assert.AreEqual(expected,exception.Message);
+                Assert.AreEqual(expected, exception.Message);
             }
         }
 
@@ -83,7 +83,7 @@ namespace MoodAnalyzerTest
         {
             object expected = new MoodAnalyse();
             ConstructorInfo constructor = MoodAnalyseFactory.GetConstructor("MoodAnalyse");
-            string[] message= {"I am in Sad Mood"};
+            string[] message = { "I am in Sad Mood" };
             object newObject = MoodAnalyseFactory.CreateMoodAnalyse(constructor, message);
             expected.Equals(newObject);
         }
@@ -95,15 +95,15 @@ namespace MoodAnalyzerTest
         public void GivenImproperClassNameShouldThrowMoodAnalysisException()
         {
             string expected = "No Such Class Found";
-            try 
+            try
             {
                 ConstructorInfo constructor = MoodAnalyseFactory.GetConstructor("AnyClass");
                 string[] message = { "I am in Sad Mood" };
                 object newObject = MoodAnalyseFactory.CreateMoodAnalyse(constructor, message);
             }
-            catch(MoodAnalysisException exception)
+            catch (MoodAnalysisException exception)
             {
-                Assert.AreEqual(expected,exception.Message);
+                Assert.AreEqual(expected, exception.Message);
             }
         }
 
@@ -122,9 +122,9 @@ namespace MoodAnalyzerTest
                 string[] message = { "I am in Sad Mood" };
                 object newObject = MoodAnalyseFactory.CreateMoodAnalyse(constructor[0], message);
             }
-            catch(MoodAnalysisException exception)
+            catch (MoodAnalysisException exception)
             {
-                Assert.AreEqual(expected,exception.Message);
+                Assert.AreEqual(expected, exception.Message);
             }
         }
 
@@ -135,8 +135,8 @@ namespace MoodAnalyzerTest
         public void GivenHappyMoodShouldReturnHappy()
         {
             string expected = "HAPPY";
-            string mood = MoodAnalyseFactory.InvokeAnalyseMood("AnalyseMood","Happy");
-            Assert.AreEqual(expected,mood);
+            string mood = MoodAnalyseFactory.InvokeAnalyseMood("AnalyseMood", "Happy");
+            Assert.AreEqual(expected, mood);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace MoodAnalyzerTest
             }
             catch (MoodAnalysisException exception)
             {
-                Assert.AreEqual(expected,exception.Message);
+                Assert.AreEqual(expected, exception.Message);
             }
         }
 
@@ -164,9 +164,28 @@ namespace MoodAnalyzerTest
         {
             string expected = "HAPPY";
             MoodAnalyse moodAnalyse = new MoodAnalyse();
-            MoodAnalyseFactory.SetField(moodAnalyse, "Happy");
+            MoodAnalyseFactory.SetField(moodAnalyse, "Happy","message");
             string mood = moodAnalyse.AnalyseMood();
-            Assert.AreEqual(expected,mood);
+            Assert.AreEqual(expected, mood);
+        }
+
+        /// <summary>
+        /// Test Case 7.2 Set Field When Improper Should Throw MoodAnalysisException.
+        /// </summary>
+        [Test]
+        public void GivenImproperFieldShouldThrowMoodAnalysisException()
+        {
+            string expected = "No Such Field Found";
+            try
+            {
+                MoodAnalyse moodAnalyse = new MoodAnalyse();
+                MoodAnalyseFactory.SetField(moodAnalyse, "Happy", "anyField");
+                string mood = moodAnalyse.AnalyseMood();
+            }
+            catch (MoodAnalysisException exception) 
+            { 
+                Assert.AreEqual(expected, exception.Message); 
+            }
         }
     }
 }
