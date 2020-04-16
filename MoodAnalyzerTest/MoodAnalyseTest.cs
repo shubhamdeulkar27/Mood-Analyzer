@@ -43,7 +43,7 @@ namespace MoodAnalyzerTest
         [Test]
         public void GivenNullMoodShouldThrowMoodAnaylsisException()
         {
-            string expected = "Please Enter Proper Mood";
+            string expected = "Can Not Set Null To Field";
             string message = null;
             MoodAnalyse moodAnalyse = new MoodAnalyse(message);
             try
@@ -185,6 +185,25 @@ namespace MoodAnalyzerTest
             catch (MoodAnalysisException exception) 
             { 
                 Assert.AreEqual(expected, exception.Message); 
+            }
+        }
+
+        /// <summary>
+        /// Test Case 7.3 Setting Null to Field should Throw MoodAnalysisException.
+        /// </summary>
+        [Test]
+        public void GivenNullFieldShouldThrowMoodAnalysisException()
+        {
+            string expected = "Can Not Set Null To Field";
+            try
+            {
+                MoodAnalyse moodAnalyse = new MoodAnalyse();
+                MoodAnalyseFactory.SetField(moodAnalyse, null, "message");
+                string mood = moodAnalyse.AnalyseMood();
+            }
+            catch (MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
             }
         }
     }
